@@ -5,7 +5,7 @@ const baseQuery = async(args, api, extraOptions) => {
     const { dispatch } = api;
 
     const rawBaseQuery = fetchBaseQuery({
-        baseUrl: "http://13.51.206.62.8000/api",
+        baseUrl: "http://13.51.206.62:8000/api",
         prepareHeaders: (Headers) => {
             const token = localStorage.getItem("token");
             if(token){

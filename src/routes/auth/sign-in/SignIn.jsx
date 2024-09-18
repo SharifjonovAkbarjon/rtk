@@ -53,7 +53,7 @@ const SignIn = () => {
                     Sign in
                 </Button>
             </Form.Item>
-            <Text> Don't have an accaunt? <Link to="/auth/sign-up">Sign in</Link> </Text>
+            <Text> Don't have an accaunt? <Link to="/auth/sign-up">Sign up</Link> </Text>
             
         </Form>
     )
