@@ -1,16 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate} from 'react-router-dom'
 import { Button, Form, Input, Typography } from 'antd';
 import { useSignUpRequestMutation } from '../../../redux/api/authApi';
 
 const {Title, Text} = Typography;
 
 const SignUp = () => {
+    const navigate = useNavigate()
     const [signUpRequest, {data, isSuccess}] = useSignUpRequestMutation();
     const onFinish = (values) => {
         signUpRequest(values)
     };
-    console.log(data);
+    useEffect(()=> {
+        if(isSuccess && data.payload?.email){
+            navigate(`/auth/otp?email=${btoa(data.payload.email)}`)
+        }
+    }, [isSuccess] )    
     
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -24,12 +29,13 @@ const SignUp = () => {
                     remember: true,
                 }}
                 onFinish={onFinish}
+                 
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Title level={1}>Sign Up</Title>
                 <Form.Item
-                    label="Firtsname"
+                    label="first_name"
                     name="first_name"
                     rules={[
                         {
@@ -54,7 +60,7 @@ const SignUp = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
+                    label="password"
                     name="password"
                     rules={[
                         {

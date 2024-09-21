@@ -15,8 +15,15 @@ const authApi = api.injectEndpoints({
                 method: "POST",
                 body
             })
+        }),
+        otpVerifyRequest:build.mutation({
+            query: (body) => ({
+                url: "/auth/send-otp",
+                method: "POST",
+                body
+            })
         })
     })
 })
 
-export const { useSignInRequestMutation,useSignUpRequestMutation } = authApi
+export const { useSignInRequestMutation,useSignUpRequestMutation, useOtpVerifyRequestMutation } = authApi
