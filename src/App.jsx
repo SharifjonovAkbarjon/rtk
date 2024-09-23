@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import RouteController from './routes'
 import Header from './components/header/Header'
+import RouteController from './routes'
 
 function App() {
 
   return (
     <>
-      <Header />
+    <Header/>
       <RouteController />
     </>
   )

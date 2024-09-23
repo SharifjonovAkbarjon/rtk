@@ -10,7 +10,7 @@ const baseQuery = async(args, api, extraOptions) => {
             const token = localStorage.getItem("token");
             if(token){
                 Headers.set("Authorization", `Bearer ${token}`)
-            }
+            }   
             return Headers
         }
     })

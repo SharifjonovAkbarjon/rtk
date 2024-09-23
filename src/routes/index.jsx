@@ -1,39 +1,48 @@
-import { Suspense } from "react"
 import { useRoutes } from "react-router-dom"
 import { lazy } from "react"
-// import SignIn from "./auth/sign-in/SignIn"
-// import SignUp from "./auth/sign-up/SignUp"
-// import Auth from "./auth/Auth"
+import Suspense from "../utils"
+import Header from "../components/header/Header"
 
-const Home = lazy(()=> import("./home/Home"))
-const Auth = lazy(()=> import("./auth/Auth"))
-const SignIn = lazy(()=> import("./auth/sign-in/SignIn"))
-const SignUp = lazy(()=> import("./auth/sign-up/SignUp"))
-const Otp = lazy(()=> import("./auth/otp/Otp"))
+
+const Auth = lazy(() => import("./auth/Auth"))
+const SignIn = lazy(() => import("./auth/sign-in/SignIn"))
+const SignUp = lazy(() => import("./auth/sign-up/SignUp"))
+const Otp = lazy(() => import("./auth/otp/Otp"))
+const Home = lazy(() => import("./home/Home"))
+const Search = lazy(()=> import("./search/Search"))
 
 
 const RouteController = () => {
-  return useRoutes( [
+  return useRoutes([
     {
-      path: "/",
-      element: <Suspense><Home/></Suspense>
+      element: <Suspense><Header/></Suspense>,
+      childen: [
+        {
+          path: "/",
+          element: <Suspense><Home/></Suspense>
+        },
+        {
+          path: "/search",
+          element: <Suspense><Search/></Suspense>
+        }
+      ]
     },
     {
       path: "/auth",
-      element: <Suspense><Auth/></Suspense>,
-      children : [
+      element: <Suspense><Auth /></Suspense>,
+      children: [
         {
           path: "/auth/otp",
-          element: <Suspense><Otp/></Suspense>
+          element: <Suspense><Otp /></Suspense>
         },
         {
           path: "/auth/sign-in",
-          element: <Suspense><SignIn/></Suspense>
+          element: <Suspense><SignIn /></Suspense>
         },
         {
           path: "/auth/sign-up",
-          element: <Suspense><SignUp/></Suspense>
-        }
+          element: <Suspense><SignUp /></Suspense>
+        },
       ]
     }
   ]
